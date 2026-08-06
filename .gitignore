@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+data/*.csv
+!data/.gitkeep
+
+models/*.joblib
+!models/.gitkeep
+
+.vscode/
+.idea/
