@@ -45,3 +45,42 @@ arenaflex-claims-automation/
    ```bash
    python -m src.models.train
    ```
+
+4. Start the prediction API:
+
+   ```bash
+   uvicorn src.app.main:app --reload
+   ```
+
+   API documentation is available at `http://localhost:8000/docs`.
+
+5. In a second terminal, start the operations dashboard:
+
+   ```bash
+   streamlit run src/dashboard/app.py
+   ```
+
+## Prediction endpoint
+
+Send a claim to `POST /predict`:
+
+```json
+{
+  "charge_amount": 1250.0,
+  "code_count": 2,
+  "has_modifier_25": 1
+}
+```
+
+The API requires `models/xgboost_denial_v1.joblib` and
+`models/scaler_v1.joblib`. Run the training pipeline before requesting a
+prediction.
+
+## Docker
+
+Build and run the API container:
+
+```bash
+docker build -t arenaflex-claims-api .
+docker run --rm -p 8000:8000 arenaflex-claims-api
+```
